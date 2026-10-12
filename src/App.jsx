@@ -1,28 +1,44 @@
 import { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Sprite from './components/Sprite'
 import Header from './components/Header'
-import Hero from './components/Hero'
-import Ticker from './components/Ticker'
-import Achievements from './components/Achievements'
-import { WhatWeDo, Expertise } from './components/Services'
-import Crew from './components/Crew'
-import About from './components/About'
-import Contact from './components/Contact'
 import Footer from './components/Footer'
+import WhatsAppFab from './components/WhatsAppFab'
+import ScrollProgress from './components/ScrollProgress'
+import Home from './pages/Home'
+import About from './pages/About'
+import Contact from './pages/Contact'
+import Services from './pages/Services'
+import ServiceDetail from './pages/ServiceDetail'
+import Achievements from './pages/Achievements'
+import AchievementDetail from './pages/AchievementDetail'
+import CaseStudies from './pages/CaseStudies'
+import CaseStudyDetail from './pages/CaseStudyDetail'
+import Stories from './pages/Stories'
+import StoryDetail from './pages/StoryDetail'
+import Courses from './pages/Courses'
+import CourseDetail from './pages/CourseDetail'
+import Crew from './pages/Crew'
+import MemberDetail from './pages/MemberDetail'
+import Testimonials from './pages/Testimonials'
+import TestimonialDetail from './pages/TestimonialDetail'
+import NotFound from './pages/NotFound'
+import { usePageMeta } from './lib/seo'
+
+// Scroll to top on route change (with instant fallback for reduced motion)
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' })
+  }, [pathname])
+  return null
+}
 
 export default function App() {
-  // stagger-reveal every [data-r] element as it scrolls into view
-  useEffect(() => {
-    const els = document.querySelectorAll('[data-r]')
-    if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('on')); return }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target) } })
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' })
-    els.forEach(el => io.observe(el))
-    return () => io.disconnect()
-  }, [])
+  const location = useLocation()
+  usePageMeta() // route-driven <title> / meta description
 
-  // spotlight glow that follows the cursor inside cards
+  // cursor spotlight inside interactive cards
   useEffect(() => {
     const move = (e) => {
       const card = e.target.closest?.('.card')
@@ -38,12 +54,45 @@ export default function App() {
   return (
     <>
       <Sprite />
-      <a className="skip" href="#main">Skip to content</a>
+      <ScrollProgress />
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-gold-500 focus:px-5 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink-950"
+        onClick={(e) => {
+          // HashRouter owns the URL hash — handle the skip link manually.
+          e.preventDefault()
+          const main = document.getElementById('main')
+          main?.focus()
+          main?.scrollIntoView()
+        }}
+      >
+        Skip to content
+      </a>
       <Header />
-      <main id="main">
-        <Hero /><Ticker /><Achievements /><WhatWeDo /><Expertise /><Crew /><About /><Contact />
+      <main id="main" tabIndex={-1} className="outline-none">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/:slug" element={<ServiceDetail />} />
+          <Route path="/achievements" element={<Achievements />} />
+          <Route path="/achievements/:slug" element={<AchievementDetail />} />
+          <Route path="/case-studies" element={<CaseStudies />} />
+          <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
+          <Route path="/stories" element={<Stories />} />
+          <Route path="/stories/:slug" element={<StoryDetail />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/:slug" element={<CourseDetail />} />
+          <Route path="/crew" element={<Crew />} />
+          <Route path="/crew/:slug" element={<MemberDetail />} />
+          <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/testimonials/:slug" element={<TestimonialDetail />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
       <Footer />
+      <WhatsAppFab />
     </>
   )
 }
