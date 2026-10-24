@@ -1,34 +1,38 @@
 import { useEffect, useRef, useState } from 'react'
+import { useReducedMotion } from 'framer-motion'
 
-// Counts up from 0 to `to` once it scrolls into view (respects reduced motion).
-export default function Counter({ to, suffix = '' }) {
+// Animated number counter — counts up when scrolled into view.
+export default function Counter({ value, suffix = '', prefix = '', duration = 1800 }) {
   const ref = useRef(null)
-  const [val, setVal] = useState(0)
-  const started = useRef(false)
+  const [display, setDisplay] = useState(0)
+  const reduced = useReducedMotion()
 
   useEffect(() => {
+    if (reduced) { setDisplay(value); return }
     const el = ref.current
     if (!el) return
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduce || !('IntersectionObserver' in window)) { setVal(to); return }
-
+    let frame = 0
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (!e.isIntersecting || started.current) return
-        started.current = true
-        io.disconnect()
-        const dur = 1400, t0 = performance.now()
-        const step = (t) => {
-          const p = Math.min(1, (t - t0) / dur)
-          setVal(Math.round(to * (1 - Math.pow(1 - p, 3)))) // easeOutCubic
-          if (p < 1) requestAnimationFrame(step)
-        }
-        requestAnimationFrame(step)
-      })
+      if (!entries[0].isIntersecting) return
+      io.disconnect()
+      const start = performance.now()
+      const tick = (now) => {
+        const p = Math.min((now - start) / duration, 1)
+        const eased = 1 - Math.pow(1 - p, 3) // easeOutCubic
+        setDisplay(Math.round(value * eased))
+        if (p < 1) frame = requestAnimationFrame(tick)
+      }
+      frame = requestAnimationFrame(tick)
     }, { threshold: 0.4 })
     io.observe(el)
-    return () => io.disconnect()
-  }, [to])
+    return () => { io.disconnect(); cancelAnimationFrame(frame) }
+  }, [value, duration, reduced])
 
-  return <b ref={ref}>{val}{suffix}</b>
+  return (
+    <span ref={ref}>
+      {prefix}
+      {display.toLocaleString()}
+      {suffix}
+    </span>
+  )
 }

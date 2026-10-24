@@ -1,23 +1,101 @@
-import Logo from './Logo'
-import Icon from './Icon'
-import { FOOTER_LINKS } from '../data'
+import { Link } from 'react-router-dom'
+import { Mail, MapPin, Send, Heart } from 'lucide-react'
+import { BrandIcon } from './Brand.jsx'
+import { NAV_LINKS } from '../data/site.js'
+import { SERVICES } from '../data/services.js'
+import { SITE, CONTACT_EMAIL, SOCIALS, whatsappLink } from '../config.js'
+
 export default function Footer() {
+  const year = new Date().getFullYear()
   return (
-    <>
-      <footer><div className="wrap">
-        <div className="f-grid">
-          <div><Logo /><p style={{ color: 'var(--mute)', fontSize: 12, maxWidth: 260, marginTop: 12 }}>Empowering hosts and creators to grow, stream and earn with confidence.</p></div>
-          {Object.entries(FOOTER_LINKS).map(([h, links]) => (
-            <div key={h}><h4>{h}</h4><ul>{links.map(([href, l]) => <li key={l}><a href={href}>{l}</a></li>)}</ul></div>
-          ))}
-          <div><h4>Contact</h4><ul><li><a href="mailto:support@mariyamedia.com">support@mariyamedia.com</a></li><li><a href="tel:+920000000000">+92 000 0000000</a></li></ul></div>
-          <div><h4>Follow Us</h4><div className="social">
-            {[['tiktok','TikTok'],['ig','Instagram'],['fb','Facebook'],['yt','YouTube']].map(([i, l]) => <a key={i} href="#" aria-label={l}><Icon name={i} /></a>)}
-          </div></div>
+    <footer className="footer">
+      <div className="container">
+        <div className="footer__grid">
+          {/* Brand */}
+          <div>
+            <div className="footer__brand">
+              <span className="footer__mark">
+                <img src={`${import.meta.env.BASE_URL}${SITE.logo}`} alt={`${SITE.name} logo`} width={60} height={60} />
+              </span>
+              <span>
+                <b>MARIYA</b>
+                <span>Media Ltd</span>
+              </span>
+            </div>
+            <p className="footer__tagline">{SITE.tagline}</p>
+            <div className="socials">
+              {SOCIALS.map((s) => (
+                <a
+                  key={s.id}
+                  data-net={s.id}
+                  href={s.id === 'whatsapp' ? whatsappLink() : s.url}
+                  target={s.id === 'whatsapp' ? undefined : '_blank'}
+                  rel="noreferrer noopener"
+                  aria-label={s.label}
+                  title={s.label}
+                >
+                  <BrandIcon id={s.id} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick links */}
+          <div>
+            <h4>Quick Links</h4>
+            <ul className="footer__list">
+              {NAV_LINKS.map((l) => (
+                <li key={l.to}><Link to={l.to}>{l.label}</Link></li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4>Services</h4>
+            <ul className="footer__list">
+              {SERVICES.slice(0, 7).map((s) => (
+                <li key={s.title}><Link to="/what-we-do">{s.title}</Link></li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4>Contact</h4>
+            <ul className="footer__contact">
+              <li>
+                <Mail size={17} aria-hidden="true" />
+                <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+              </li>
+              <li>
+                <Send size={17} aria-hidden="true" />
+                <a href={whatsappLink()} target="_blank" rel="noreferrer noopener">WhatsApp us</a>
+              </li>
+              <li>
+                <MapPin size={17} aria-hidden="true" />
+                <span>Lahore, Pakistan · Worldwide (online)</span> {/* PLACEHOLDER: confirm address */}
+              </li>
+            </ul>
+            <ButtonLike href={whatsappLink()} />
+          </div>
         </div>
-        <div className="copy"><span>© {new Date().getFullYear()} Mariya Media Ltd. All rights reserved.</span><span><a href="#">Privacy Policy</a> &nbsp; <a href="#">Terms &amp; Conditions</a></span></div>
-      </div></footer>
-      <a className="wa" href="#contact" aria-label="Chat on WhatsApp"><Icon name="whatsapp" /></a>
-    </>
+
+        <div className="footer__bottom">
+          <span>© {year} {SITE.name}. All rights reserved.</span>
+          <span>
+            Made with <Heart size={13} style={{ display: 'inline', color: 'var(--pink)' }} aria-hidden="true" /> · Alhamdulillah
+          </span>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+function ButtonLike({ href }) {
+  return (
+    <a className="btn btn--sm btn--ghost" href={href} target="_blank" rel="noreferrer noopener">
+      <BrandIcon id="whatsapp" size={15} /> Chat on WhatsApp
+    </a>
   )
 }

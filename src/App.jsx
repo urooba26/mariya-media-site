@@ -1,49 +1,79 @@
-import { useEffect } from 'react'
-import Sprite from './components/Sprite'
-import Header from './components/Header'
-import Hero from './components/Hero'
-import Ticker from './components/Ticker'
-import Achievements from './components/Achievements'
-import { WhatWeDo, Expertise } from './components/Services'
-import Crew from './components/Crew'
-import About from './components/About'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
+import { lazy, Suspense, useEffect } from 'react'
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence, useReducedMotion } from 'framer-motion'
+
+import Preloader from './components/Preloader.jsx'
+import ScrollProgress from './components/ScrollProgress.jsx'
+import CursorGlow from './components/CursorGlow.jsx'
+import Navbar from './components/Navbar.jsx'
+import Footer from './components/Footer.jsx'
+import FloatingWhatsApp from './components/FloatingWhatsApp.jsx'
+import PageTransition from './components/PageTransition.jsx'
+
+// Routes are lazy-loaded for fast first paint.
+const Home = lazy(() => import('./pages/Home.jsx'))
+const WhatWeDo = lazy(() => import('./pages/WhatWeDo.jsx'))
+const Expertise = lazy(() => import('./pages/Expertise.jsx'))
+const Crew = lazy(() => import('./pages/Crew.jsx'))
+const About = lazy(() => import('./pages/About.jsx'))
+const Contact = lazy(() => import('./pages/Contact.jsx'))
+const NotFound = lazy(() => import('./pages/NotFound.jsx'))
+
+// Scroll to top on every route change.
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'auto' }) }, [pathname])
+  return null
+}
+
+// Route loader fallback.
+function RouteLoader() {
+  return (
+    <div style={{ minHeight: '60vh', display: 'grid', placeItems: 'center' }} role="status" aria-label="Loading page">
+      <div style={{ textAlign: 'center' }}>
+        <div className="spinner" style={{ width: 44, height: 44, margin: '0 auto', borderColor: 'rgba(201,162,75,.25)', borderTopColor: '#f1d27a' }} />
+        <p style={{ marginTop: 18, fontSize: 12, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--gold)' }}>Loading</p>
+      </div>
+    </div>
+  )
+}
+
+function AnimatedRoutes() {
+  const location = useLocation()
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+        <Route path="/what-we-do" element={<PageTransition><WhatWeDo /></PageTransition>} />
+        <Route path="/expertise" element={<PageTransition><Expertise /></PageTransition>} />
+        <Route path="/crew" element={<PageTransition><Crew /></PageTransition>} />
+        <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+        <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+        <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+      </Routes>
+    </AnimatePresence>
+  )
+}
 
 export default function App() {
-  // stagger-reveal every [data-r] element as it scrolls into view
-  useEffect(() => {
-    const els = document.querySelectorAll('[data-r]')
-    if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('on')); return }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target) } })
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' })
-    els.forEach(el => io.observe(el))
-    return () => io.disconnect()
-  }, [])
-
-  // spotlight glow that follows the cursor inside cards
-  useEffect(() => {
-    const move = (e) => {
-      const card = e.target.closest?.('.card')
-      if (!card) return
-      const r = card.getBoundingClientRect()
-      card.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`)
-      card.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`)
-    }
-    document.addEventListener('pointermove', move)
-    return () => document.removeEventListener('pointermove', move)
-  }, [])
-
+  const reduced = useReducedMotion()
   return (
-    <>
-      <Sprite />
-      <a className="skip" href="#main">Skip to content</a>
-      <Header />
-      <main id="main">
-        <Hero /><Ticker /><Achievements /><WhatWeDo /><Expertise /><Crew /><About /><Contact />
+    <HashRouter>
+      <a className="skip-link" href="#main">Skip to main content</a>
+      <Preloader />
+      <ScrollProgress />
+      <CursorGlow />
+      <ScrollToTop />
+      <Navbar />
+
+      <main id="main" style={{ minHeight: '60vh' }}>
+        <Suspense fallback={reduced ? null : <RouteLoader />}>
+          <AnimatedRoutes />
+        </Suspense>
       </main>
+
       <Footer />
-    </>
+      <FloatingWhatsApp />
+    </HashRouter>
   )
 }
