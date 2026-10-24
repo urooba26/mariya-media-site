@@ -79,7 +79,7 @@ export const FOUNDERS = [
   },
   {
     id: 'aryam',
-    name: 'Aryam Hasmi',
+    name: 'Aryam Hashmi',
     role: 'Founder',
     photo: null, // PLACEHOLDER: portrait at public/photos/aryam.jpg
     tagline: 'Standing beside the dream.',

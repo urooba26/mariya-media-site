@@ -27,7 +27,7 @@ export const CREW = [
   {
     id: 'aryam',
     group: 'Leadership',
-    name: 'Aryam Hasmi',
+    name: 'Aryam Hashmi',
     role: 'Founder',
     photo: null, // PLACEHOLDER: add a real portrait at public/photos/aryam.jpg
     location: 'Pakistan', // PLACEHOLDER: confirm location

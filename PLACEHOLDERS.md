@@ -56,7 +56,7 @@ thumbnails in `public/photos/`.
 | Member | Status |
 |---|---|
 | **Mariya Rajpoot** — Co-Founder | Real intro + quote supplied. **Photo** and **location** are placeholders; TikTok/Instagram URLs are placeholders. |
-| **Aryam Hasmi** — Founder | Real intro supplied. Name and title confirmed by the client. Photo, location, social URLs are placeholders. |
+| **Aryam Hashmi** — Founder | Real intro supplied. Name and title confirmed by the client. Photo, location, social URLs are placeholders. |
 | Sana Iqbal, Bilal Ahmed | **Dummy managers** — replace names, roles, bios, photos, links |
 | Hina Malik, Zara Khan | **Dummy senior hosts** — replace everything |
 | Ayesha Noor, Fatima Raza, Usman Tariq | **Dummy hosts** — replace everything |
@@ -86,8 +86,8 @@ via the same `import.meta.env.BASE_URL` pattern used for the logo if images fail
 |---|---|
 | `STORY`, `MISSION`, `VISION`, `VALUES` | ✅ Real supplied copy (light grammar polish only) |
 | `FOUNDERS[0]` Mariya Rajpoot (Co-Founder) — intro, pull quote, "Beyond the Co-Founder", "My Promise" | ✅ Real supplied copy |
-| `FOUNDERS[1]` Aryam Hasmi (Founder) — journey, purpose, leadership, difference, message, vision | ✅ Real supplied copy |
-| Founders' names & titles | ✅ Confirmed: **Aryam Hasmi — Founder**, **Mariya Rajpoot — Co-Founder** |
+| `FOUNDERS[1]` Aryam Hashmi (Founder) — journey, purpose, leadership, difference, message, vision | ✅ Real supplied copy |
+| Founders' names & titles | ✅ Confirmed: **Aryam Hashmi — Founder**, **Mariya Rajpoot — Co-Founder** |
 | `TIMELINE` (2021–2025) | **Sample dates/titles** — confirm the real milestones |
 | **Split of the founder letter** | ⚠️ The client's two supplied texts arrived as one long letter attributed to the co-founder. We split it by voice: **Mariya** → *Beyond the Founder*, *My Promise*; **Aryam** → *Journey to TikTok*, *My Purpose*, *Leadership Philosophy*, *What Makes Us Different*, *A Message to Creators*, *My Vision*. Re-assign any section by moving it between the two `sections` arrays above. |
 | Founder portraits | Placeholders (`photo: null`) — add real portraits |
