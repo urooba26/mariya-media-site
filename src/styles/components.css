@@ -80,7 +80,7 @@
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 900;
+  z-index: 960; /* above the mobile menu (950) so the SAME hamburger stays visible and animates to X in place */
   transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease),
     backdrop-filter 0.4s var(--ease), height 0.4s var(--ease);
   height: var(--nav-h);
@@ -158,6 +158,7 @@
   border: 1px solid var(--glass-border);
   background: var(--glass);
   place-items: center;
+  align-content: center; /* without this, grid stretches the 3 rows to fill 46px → bars sit ~17px apart and the open-state X math (±7px) rendered a ">" instead */
   z-index: 951;
 }
 .hamburger span {
@@ -181,7 +182,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 100px 28px 40px;
+  padding: 124px 28px 40px; /* clears the fixed navbar, which now sits above the overlay */
   overflow-y: auto;
 }
 .mobile-menu__link {
@@ -208,6 +209,12 @@
 @media (max-width: 1024px) {
   .nav__links, .nav__cta .btn { display: none; }
   .hamburger { display: grid; }
+}
+/* Small phones: the two-line tagline under MARIYA wrapped and crowded the
+   header — keep only the wordmark. */
+@media (max-width: 640px) {
+  .nav__name span { display: none; }
+  .nav__name b { font-size: 17px; letter-spacing: 0.12em; }
 }
 
 /* ── Buttons ──────────────────────────────────────────────────────────────── */
@@ -716,6 +723,7 @@
 }
 .avatar-card:hover { transform: translateY(-6px); border-color: rgba(201, 162, 75, 0.5); box-shadow: var(--shadow-soft); }
 .avatar-card__photo {
+  display: block; /* span is inline by default — width/height were being ignored, which blew the portrait up to full card width and buried the name */
   width: 110px; height: 110px;
   margin: 0 auto 16px;
   border-radius: 50%;

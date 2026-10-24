@@ -13,17 +13,17 @@ export const SITE = {
 }
 
 // ── WhatsApp ────────────────────────────────────────────────────────────────
-// PLACEHOLDER: replace with the real number (digits only, WITH country code,
-// no "+" and no spaces). 923000000000 is a dummy Pakistan-format number.
-export const WHATSAPP_NUMBER = '923000000000'
+// Real business number: +48 669 296 554 — digits only, WITH country code,
+// no "+" and no spaces (48 = Poland).
+export const WHATSAPP_NUMBER = '48669296554'
 
 // The pre-filled message opened when someone taps the floating button.
 export const WHATSAPP_MESSAGE =
   "Hi Mariya Media Ltd! I'd like to know more about joining your TikTok agency."
 
 // ── Email ───────────────────────────────────────────────────────────────────
-// PLACEHOLDER: replace with the real enquiry inbox.
-export const CONTACT_EMAIL = 'hello@mariyamedia.example'
+// Real business inbox.
+export const CONTACT_EMAIL = 'ariyam0804@gmail.com'
 
 // ── Google Apps Script (contact form backend) ───────────────────────────────
 // PLACEHOLDER: paste your deployed Web App URL here (it ends with /exec).

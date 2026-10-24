@@ -74,7 +74,7 @@ export default function Footer() {
               </li>
               <li>
                 <MapPin size={17} aria-hidden="true" />
-                <span>Lahore, Pakistan · Worldwide (online)</span> {/* PLACEHOLDER: confirm address */}
+                <span>Worldwide — we work remotely</span>
               </li>
             </ul>
             <ButtonLike href={whatsappLink()} />

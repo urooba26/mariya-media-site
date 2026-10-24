@@ -66,7 +66,7 @@ export default function Contact() {
                   <span className="contact-list__icon"><MapPin size={19} /></span>
                   <span>
                     <b>Based in</b>
-                    <span>Lahore, Pakistan · Worldwide (online)</span> {/* PLACEHOLDER */}
+                    <span>Worldwide — we work remotely</span>
                   </span>
                 </div>
               </div>

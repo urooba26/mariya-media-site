@@ -12,7 +12,7 @@ export const CREW = [
     id: 'mariya',
     group: 'Leadership',
     name: 'Mariya Rajpoot',
-    role: 'Founder / Visionary',
+    role: 'Co-Founder',
     photo: null, // PLACEHOLDER: add a real portrait at public/photos/mariya.jpg
     location: 'Lahore, Pakistan', // PLACEHOLDER: confirm location
     intro:
@@ -27,8 +27,8 @@ export const CREW = [
   {
     id: 'aryam',
     group: 'Leadership',
-    name: 'Aryam', // PLACEHOLDER: surname to be confirmed by the client
-    role: 'Co-Founder',
+    name: 'Aryam Hasmi',
+    role: 'Founder',
     photo: null, // PLACEHOLDER: add a real portrait at public/photos/aryam.jpg
     location: 'Pakistan', // PLACEHOLDER: confirm location
     intro:

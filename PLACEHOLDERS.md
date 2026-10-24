@@ -15,9 +15,9 @@ for `PLACEHOLDER` to find them in context.
 | What | Current value | What to put |
 |---|---|---|
 | `SITE.url` | `https://example.com` | Your real domain (used in meta/OG tags) |
-| `WHATSAPP_NUMBER` | `923000000000` (dummy) | Your real number, **digits only + country code**, e.g. `923001234567` |
+| `WHATSAPP_NUMBER` | ✅ Real: `48669296554` (+48 669 296 554) | — |
 | `WHATSAPP_MESSAGE` | "Hi Mariya Media Ltd!…" | Optional: tweak the pre-filled message |
-| `CONTACT_EMAIL` | `hello@mariyamedia.example` | Your real enquiry inbox |
+| `CONTACT_EMAIL` | ✅ Real: `ariyam0804@gmail.com` | — |
 | `GOOGLE_APPS_SCRIPT_URL` | `''` (empty → form simulates submit) | Your deployed `/exec` Web App URL |
 | `SOCIALS[].url` | `@youragency` dummy links | Real TikTok / Instagram / YouTube profile URLs |
 
@@ -55,8 +55,8 @@ thumbnails in `public/photos/`.
 
 | Member | Status |
 |---|---|
-| **Mariya Rajpoot** — Founder / Visionary | Real intro + quote supplied. **Photo** and **location** are placeholders; TikTok/Instagram URLs are placeholders. |
-| **Aryam** — Co-Founder | Real intro supplied. **Surname still to be confirmed** (currently just "Aryam"). Photo, location, social URLs are placeholders. |
+| **Mariya Rajpoot** — Co-Founder | Real intro + quote supplied. **Photo** and **location** are placeholders; TikTok/Instagram URLs are placeholders. |
+| **Aryam Hasmi** — Founder | Real intro supplied. Name and title confirmed by the client. Photo, location, social URLs are placeholders. |
 | Sana Iqbal, Bilal Ahmed | **Dummy managers** — replace names, roles, bios, photos, links |
 | Hina Malik, Zara Khan | **Dummy senior hosts** — replace everything |
 | Ayesha Noor, Fatima Raza, Usman Tariq | **Dummy hosts** — replace everything |
@@ -85,9 +85,9 @@ via the same `import.meta.env.BASE_URL` pattern used for the logo if images fail
 | Content | Status |
 |---|---|
 | `STORY`, `MISSION`, `VISION`, `VALUES` | ✅ Real supplied copy (light grammar polish only) |
-| `FOUNDERS[0]` Mariya — intro, pull quote, "Beyond the Founder", "My Promise" | ✅ Real supplied copy |
-| `FOUNDERS[1]` Aryam — journey, purpose, leadership, difference, message, vision | ✅ Real supplied copy |
-| Aryam's **surname** | ⚠️ Still to be confirmed |
+| `FOUNDERS[0]` Mariya Rajpoot (Co-Founder) — intro, pull quote, "Beyond the Co-Founder", "My Promise" | ✅ Real supplied copy |
+| `FOUNDERS[1]` Aryam Hasmi (Founder) — journey, purpose, leadership, difference, message, vision | ✅ Real supplied copy |
+| Founders' names & titles | ✅ Confirmed: **Aryam Hasmi — Founder**, **Mariya Rajpoot — Co-Founder** |
 | `TIMELINE` (2021–2025) | **Sample dates/titles** — confirm the real milestones |
 | **Split of the founder letter** | ⚠️ The client's two supplied texts arrived as one long letter attributed to the co-founder. We split it by voice: **Mariya** → *Beyond the Founder*, *My Promise*; **Aryam** → *Journey to TikTok*, *My Purpose*, *Leadership Philosophy*, *What Makes Us Different*, *A Message to Creators*, *My Vision*. Re-assign any section by moving it between the two `sections` arrays above. |
 | Founder portraits | Placeholders (`photo: null`) — add real portraits |
@@ -101,8 +101,8 @@ via the same `import.meta.env.BASE_URL` pattern used for the logo if images fail
   update the canonical URL once the domain is known.
 - `public/logo.jpg` — the real logo, used everywhere (navbar, footer,
   preloader, favicon, OG image).
-- Footer address (`Lahore, Pakistan · Worldwide`) in `src/components/Footer.jsx`
-  and `src/pages/Contact.jsx` — confirm the real location line.
+- Location line: ✅ Confirmed as **"Worldwide — we work remotely"**
+  (`src/components/Footer.jsx` and `src/pages/Contact.jsx`).
 
 ---
 

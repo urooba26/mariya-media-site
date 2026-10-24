@@ -52,7 +52,7 @@ export const FOUNDERS = [
   {
     id: 'mariya',
     name: 'Mariya Rajpoot',
-    role: 'Founder / Visionary',
+    role: 'Co-Founder',
     photo: null, // PLACEHOLDER: portrait at public/photos/mariya.jpg
     tagline: 'The question that started it all.',
     intro:
@@ -60,7 +60,7 @@ export const FOUNDERS = [
     pull: 'I don’t simply want to create creators. I want to help create confidence.',
     sections: [
       {
-        heading: 'Beyond the Founder',
+        heading: 'Beyond the Co-Founder',
         paras: [
           'I am a wife, a proud mother of three, and professionally, an educator. Being a mother and a professional has taught me that strength comes from responsibility, patience, and perseverance. I believe that every achievement in my life has come through hard work, determination, and — above all — the blessings of Allah.',
           'I believe I have been given the ability to turn challenges into opportunities, to find strength where others may see difficulty, and to transform what seems ordinary into something meaningful.',
@@ -79,8 +79,8 @@ export const FOUNDERS = [
   },
   {
     id: 'aryam',
-    name: 'Aryam', // PLACEHOLDER: surname to be confirmed
-    role: 'Co-Founder',
+    name: 'Aryam Hasmi',
+    role: 'Founder',
     photo: null, // PLACEHOLDER: portrait at public/photos/aryam.jpg
     tagline: 'Standing beside the dream.',
     intro:

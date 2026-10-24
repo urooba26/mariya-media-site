@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { X } from 'lucide-react'
 import Logo from './Logo.jsx'
 import Button from './Button.jsx'
 import { BrandIcon } from './Brand.jsx'
@@ -90,15 +89,9 @@ export default function Navbar() {
             exit="exit"
             aria-label="Mobile navigation"
           >
-            <button
-              type="button"
-              className="hamburger open"
-              style={{ position: 'absolute', top: 16, right: 20 }}
-              aria-label="Close menu"
-              onClick={() => setOpen(false)}
-            >
-              <X size={22} color="#fff" />
-            </button>
+            {/* The header hamburger (z-index above this overlay) is the single
+                open/close control — it morphs bars→X in place, so there is no
+                duplicate close button jumping to a different position. */}
 
             {NAV_LINKS.map((l, i) => (
               <motion.div key={l.to} variants={itemVariants}>
